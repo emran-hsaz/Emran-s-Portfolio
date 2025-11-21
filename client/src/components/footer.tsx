@@ -85,12 +85,12 @@ export default function Footer() {
                     target={social.href.startsWith("http") ? "_blank" : undefined}
                     rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     aria-label={social.label}
+                    data-testid={social.testId}
                   >
                     <Button
                       variant="ghost"
                       size="icon"
                       className="rounded-full"
-                      data-testid={social.testId}
                     >
                       <Icon className="h-5 w-5" />
                     </Button>

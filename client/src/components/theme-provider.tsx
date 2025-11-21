@@ -27,28 +27,36 @@ export function ThemeProvider({
   children,
   defaultTheme = "light",
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(() => {
+  const [initialTheme] = useState<Theme>(() => {
     if (typeof window !== "undefined" && window.__THEME__) {
       return window.__THEME__;
     }
     return defaultTheme;
   });
-  const initialTheme = typeof window !== "undefined" && window.__THEME__ ? window.__THEME__ : defaultTheme;
+  
+  const [theme, setTheme] = useState<Theme>(initialTheme);
+  const [isFirstRender, setIsFirstRender] = useState(true);
 
   useLayoutEffect(() => {
-    if (theme === initialTheme) {
-      return;
-    }
-    
     const root = document.documentElement;
-    root.classList.remove("light", "dark");
-    root.classList.add(theme);
+    const hasCorrectClass = root.classList.contains(theme);
+    
+    if (isFirstRender) {
+      setIsFirstRender(false);
+      if (!hasCorrectClass) {
+        root.classList.remove("light", "dark");
+        root.classList.add(theme);
+      }
+    } else {
+      root.classList.remove("light", "dark");
+      root.classList.add(theme);
+    }
     
     if (typeof window !== "undefined") {
       localStorage.setItem("theme", theme);
       window.__THEME__ = theme;
     }
-  }, [theme, initialTheme]);
+  }, [theme, isFirstRender]);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));

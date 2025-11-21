@@ -77,12 +77,12 @@ export default function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn Profile"
+            data-testid="link-hero-linkedin"
           >
             <Button
               variant="ghost"
               size="icon"
               className="rounded-full"
-              data-testid="button-hero-linkedin"
             >
               <Linkedin className="h-5 w-5" />
             </Button>
@@ -90,12 +90,12 @@ export default function Hero() {
           <a
             href="mailto:emranhwh24@gmail.com"
             aria-label="Email Contact"
+            data-testid="link-hero-email"
           >
             <Button
               variant="ghost"
               size="icon"
               className="rounded-full"
-              data-testid="button-hero-email"
             >
               <Mail className="h-5 w-5" />
             </Button>

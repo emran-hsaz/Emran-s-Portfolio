@@ -23,6 +23,7 @@ import { apiRequest } from "@/lib/queryClient";
 export default function Contact() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formLevelErrors, setFormLevelErrors] = useState<string[]>([]);
 
   const form = useForm<InsertContactMessage>({
     resolver: zodResolver(insertContactMessageSchema),
@@ -36,6 +37,7 @@ export default function Contact() {
 
   const onSubmit = async (data: InsertContactMessage) => {
     setIsSubmitting(true);
+    setFormLevelErrors([]);
     try {
       await apiRequest("POST", "/api/contact", data);
       
@@ -53,33 +55,22 @@ export default function Contact() {
       if (fieldErrors && typeof fieldErrors === 'object') {
         Object.entries(fieldErrors).forEach(([field, messages]) => {
           if (Array.isArray(messages) && messages.length > 0) {
-            form.setError(field as any, { message: messages.join(', ') });
+            form.setError(field as any, { message: messages[0] });
           }
         });
-        
-        const allMessages = [
-          ...Object.values(fieldErrors).flat() as string[],
-          ...(formErrors || [])
-        ];
-        
-        toast({
-          title: "Validation Error",
-          description: allMessages.join('. ') || errorMessage,
-          variant: "destructive",
-        });
-      } else if (formErrors && Array.isArray(formErrors) && formErrors.length > 0) {
-        toast({
-          title: "Validation Error",
-          description: formErrors.join('. '),
-          variant: "destructive",
-        });
-      } else {
-        toast({
-          title: "Error",
-          description: errorMessage,
-          variant: "destructive",
-        });
       }
+      
+      if (formErrors && Array.isArray(formErrors) && formErrors.length > 0) {
+        setFormLevelErrors(formErrors);
+      } else if (!fieldErrors) {
+        setFormLevelErrors([errorMessage]);
+      }
+      
+      toast({
+        title: fieldErrors ? "Please check the form for errors" : "Error",
+        description: formErrors && formErrors.length > 0 ? formErrors.join('. ') : errorMessage,
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -256,6 +247,18 @@ export default function Contact() {
                     </FormItem>
                   )}
                 />
+
+                {formLevelErrors.length > 0 && (
+                  <div className="p-4 rounded-md bg-destructive/10 border border-destructive/20" data-testid="alert-form-errors">
+                    <div className="space-y-2">
+                      {formLevelErrors.map((error, index) => (
+                        <p key={index} className="text-sm text-destructive font-medium">
+                          {error}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 <Button
                   type="submit"
