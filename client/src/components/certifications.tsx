@@ -28,8 +28,8 @@ const certifications = [
     id: "aws-cloud-practitioner",
     name: "AWS Certified Cloud Practitioner",
     issuer: "Amazon Web Services",
-    description: "AWS cloud concepts, services, and best practices",
-    tags: ["AWS", "Cloud", "Fundamentals"],
+    description: "AWS cloud concepts, security, technology, and billing fundamentals",
+    tags: ["Cloud Concepts", "Security", "Technology", "Billing"],
   },
 ];
 

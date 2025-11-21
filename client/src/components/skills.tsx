@@ -14,13 +14,13 @@ const skillCategories = [
     id: "observability",
     title: "Full-stack Observability",
     icon: Eye,
-    skills: ["ELK Stack", "Elastic APM", "Logstash (ETL)", "Kibana", "Elasticsearch"],
+    skills: ["ELK Stack", "Elastic APM", "Logstash (ETL)", "Kibana", "Elasticsearch", "SLI/SLO", "ML/Jobs"],
   },
   {
     id: "containerization",
     title: "Containerization & Orchestration",
     icon: Container,
-    skills: ["Docker", "Container Registry", "Docker Compose", "Microservices"],
+    skills: ["Docker", "Container Registry", "Docker Compose", "Microservices", "Kubernetes"],
   },
   {
     id: "devops-tools",

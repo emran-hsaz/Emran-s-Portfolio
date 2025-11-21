@@ -7,7 +7,7 @@ const experiences = [
     id: "acuative",
     title: "DevOps Engineer",
     company: "Acuative",
-    location: "Remote",
+    location: "On-site",
     period: "Jan 2024 - Present",
     description: [
       "Deployed and managed Docker containers in clustered environments to improve scalability, reliability, and performance",
@@ -18,13 +18,13 @@ const experiences = [
       "Supported operations in air-gapped environments, designing and maintaining secure, isolated infrastructure",
       "Utilized Git for version control, ensuring consistent configuration management and collaborative workflows",
     ],
-    tags: ["Docker", "ELK Stack", "Elastic APM", "Ansible", "Bash", "Linux", "Git"],
+    tags: ["Docker", "ELK Stack", "Elastic APM", "Ansible", "Bash", "Linux", "Git", "Machine Learning Jobs"],
   },
   {
     id: "dai-usaid",
     title: "Software Developer",
     company: "DAI (USAID) - PFMA",
-    location: "Hybrid",
+    location: "On-site",
     period: "Sep 2023 - Jan 2024",
     description: [
       "Provided Oracle APEX & PL/SQL development for software projects",
@@ -40,7 +40,7 @@ const experiences = [
     id: "tahaluf",
     title: "Full-Stack Developer",
     company: "Tahaluf Al Emarat Technical Solutions",
-    location: "On-site",
+    location: "Remotely",
     period: "Feb 2023 - Aug 2023",
     description: [
       "Developed full-stack applications using Angular, C#, ASP.NET, and Web API",

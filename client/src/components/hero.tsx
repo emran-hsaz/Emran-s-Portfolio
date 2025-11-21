@@ -1,6 +1,6 @@
 import { ChevronDown, Linkedin, Github, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroImage from "@assets/generated_images/professional_devops_engineer_headshot.png";
+import heroImage from "@assets/emran_portrait.jpg";
 
 export default function Hero() {
   const scrollToSection = (href: string) => {
