@@ -1,37 +1,38 @@
-import { type User, type InsertUser } from "@shared/schema";
+import { type ContactMessage, type InsertContactMessage } from "@shared/schema";
 import { randomUUID } from "crypto";
 
-// modify the interface with any CRUD methods
-// you might need
-
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  getContactMessage(id: string): Promise<ContactMessage | undefined>;
+  getAllContactMessages(): Promise<ContactMessage[]>;
+  createContactMessage(message: InsertContactMessage): Promise<ContactMessage>;
 }
 
 export class MemStorage implements IStorage {
-  private users: Map<string, User>;
+  private contactMessages: Map<string, ContactMessage>;
 
   constructor() {
-    this.users = new Map();
+    this.contactMessages = new Map();
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+  async getContactMessage(id: string): Promise<ContactMessage | undefined> {
+    return this.contactMessages.get(id);
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+  async getAllContactMessages(): Promise<ContactMessage[]> {
+    return Array.from(this.contactMessages.values());
   }
 
-  async createUser(insertUser: InsertUser): Promise<User> {
+  async createContactMessage(
+    insertMessage: InsertContactMessage
+  ): Promise<ContactMessage> {
     const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+    const message: ContactMessage = {
+      ...insertMessage,
+      id,
+      createdAt: new Date(),
+    };
+    this.contactMessages.set(id, message);
+    return message;
   }
 }
 
